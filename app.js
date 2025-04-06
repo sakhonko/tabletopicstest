@@ -28,3 +28,19 @@ function nextQuestion() {
   currentIndex = (currentIndex + 1) % questions.length;
   showQuestion();
 }
+// Initialize MiniApp
+Telegram.WebApp.ready();
+
+// Fetch questions from bot
+Telegram.WebApp.sendData(JSON.stringify({ 
+  action: "get_questions", 
+  lang: "en" // Default language
+}));
+
+// Handle bot response
+window.addEventListener("message", (event) => {
+  if (event.data.action === "questions_loaded") {
+    questions = event.data.questions;
+    showQuestion();
+  }
+});
