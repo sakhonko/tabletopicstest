@@ -8,7 +8,7 @@ let currentQuestionIndex = 0;
 // Function to fetch questions from channel
 async function fetchQuestions() {
     try {
-        const response = await fetch("https://vadimsakhonko.repl.co/questions?lang=en");
+        const response = await fetch("https://myapp.vadimsakhonko.repl.co/questions?lang=en");
         questions = await response.json();
         if (questions.length > 0) {
             showQuestion();
