@@ -5,17 +5,31 @@ Telegram.WebApp.expand();
 let questions = [];
 let currentQuestionIndex = 0;
 
-// Function to fetch questions from channel
-async function fetch("https://myapp.vadimsakhonko.repl.co/questions?lang=en")
-    .then(response => response.json())
-    .then(data => {
-        console.log("Questions loaded:", data);
-    });
-
+// Function to fetch questions from the backend
+async function fetchQuestions() {
+    try {
+        const response = await fetch("https://myapp.vadimsakhonko.repl.co/questions?lang=en");
+        const data = await response.json();
+        
+        // Check if questions are loaded
+        if (data && data.questions) {
+            questions = data.questions;
+            showQuestion();
+        } else {
+            console.error("No questions received or error fetching data.");
+        }
+    } catch (error) {
+        console.error("Error fetching questions:", error);
+    }
+}
 
 // Display current question
 function showQuestion() {
-    document.getElementById('question-text').textContent = questions[currentQuestionIndex];
+    if (questions.length > 0) {
+        document.getElementById('question-text').textContent = questions[currentQuestionIndex];
+    } else {
+        document.getElementById('question-text').textContent = "No questions available.";
+    }
 }
 
 // Button handlers
