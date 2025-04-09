@@ -8,15 +8,8 @@ let currentQuestionIndex = 0;
 // Function to fetch questions from channel
 async function fetchQuestions() {
     try {
-        // Send request to bot to get questions
-        const response = await fetch('https://api.telegram.org/7880430763:AAHQ_gqz99lt6xlLtSLVRIQtnNo7jFHAuUw/getUpdates');
-        const data = await response.json();
-        
-        // Process questions (this is simplified - you'll need proper parsing)
-        questions = data.result
-            .filter(msg => msg.channel_post && msg.channel_post.text)
-            .map(msg => msg.channel_post.text);
-            
+        const response = await fetch("https://vadimsakhonko.repl.co/questions?lang=en");
+        questions = await response.json();
         if (questions.length > 0) {
             showQuestion();
         } else {
