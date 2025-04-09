@@ -6,20 +6,12 @@ let questions = [];
 let currentQuestionIndex = 0;
 
 // Function to fetch questions from channel
-async function fetchQuestions() {
-    try {
-        const response = await fetch("https://myapp.vadimsakhonko.repl.co/questions?lang=en");
-        questions = await response.json();
-        if (questions.length > 0) {
-            showQuestion();
-        } else {
-            document.getElementById('question-text').textContent = "No questions found!";
-        }
-    } catch (error) {
-        console.error("Error fetching questions:", error);
-        document.getElementById('question-text').textContent = "Error loading questions";
-    }
-}
+async function fetch("https://myapp.vadimsakhonko.repl.co/questions?lang=en")
+    .then(response => response.json())
+    .then(data => {
+        console.log("Questions loaded:", data);
+    });
+
 
 // Display current question
 function showQuestion() {
