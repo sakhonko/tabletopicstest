@@ -14,12 +14,14 @@ async function fetchQuestions() {
         // Check if questions are loaded
         if (data && data.questions) {
             questions = data.questions;
-            showQuestion();
+            showQuestion(); // Call function to display the first question
         } else {
             console.error("No questions received or error fetching data.");
+            document.getElementById('question-text').textContent = "No questions available.";
         }
     } catch (error) {
         console.error("Error fetching questions:", error);
+        document.getElementById('question-text').textContent = "Error loading questions.";
     }
 }
 
@@ -27,8 +29,6 @@ async function fetchQuestions() {
 function showQuestion() {
     if (questions.length > 0) {
         document.getElementById('question-text').textContent = questions[currentQuestionIndex];
-    } else {
-        document.getElementById('question-text').textContent = "No questions available.";
     }
 }
 
